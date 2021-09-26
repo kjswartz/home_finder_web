@@ -1,14 +1,14 @@
 [
   {
-    "id": "123",
     "address": "108 Marietta Dr",
     "city": "SAN FRANCISCO",
     "state": "CA",
     "zip": "94127",
-    "price": "1095000",
-    "beds": 3,
-    "baths": 2.0,
+    "beds": "3",
+    "baths": "2.0",
     "status": "Active",
+    "yearBuilt": "1956",
+    "propertyType": "single family",
     "url": "https://www.redfin.com/CA/San-Francisco/108-Marietta-Dr-94127/home/1412362"
   },
   {
@@ -21,6 +21,8 @@
     "beds": 3,
     "baths": 2.0,
     "status": "Active",
+    "yearBuilt": "1956",
+    "propertyType": "single family",
     "url": "http://www.redfin.com/CA/San-Francisco/2392-Bryant-St-94110/home/733250"
   }
 ]

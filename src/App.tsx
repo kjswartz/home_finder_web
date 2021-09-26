@@ -1,12 +1,17 @@
 import { FC } from 'react'
+import { ApolloProvider } from '@apollo/client'
 import styled from 'styled-components'
 import Homez from './components/homez'
 
+import { client } from './apolloClient'
+
 const App: FC = () => (
-  <Container>
-    <Title>Home Finderz</Title>
-    <Homez />
-  </Container>
+  <ApolloProvider client={client}>
+    <Container>
+      <Title>Home Finderz</Title>
+      <Homez />
+    </Container>
+  </ApolloProvider>
 )
 
 export default App;

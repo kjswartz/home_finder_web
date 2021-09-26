@@ -1,16 +1,16 @@
 import { FC } from 'react'
 import styled from 'styled-components'
 
-import { IHome } from '../types'
+import { Homes_homes } from '../graphql/schema'
 
 interface Props {
-  home: IHome
+  home: Homes_homes
 }
 
-const Home: FC<Props> = ({ home }) => {
+const Home: FC<Props> = ({ home: { address } }) => {
   return (
     <Container>
-      {home.address}
+      {address}
     </Container>
   )
 }

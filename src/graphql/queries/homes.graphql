@@ -1,0 +1,11 @@
+query Homes($search: String) {
+  homes(search: $search) {
+    id
+    address
+    city
+    state
+    zip
+    propertyType
+    yearBuilt
+  }
+}

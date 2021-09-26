@@ -1,14 +1,18 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { map } from 'lodash/fp'
+import { useQuery  } from '@apollo/client'
+import { loader } from 'graphql.macro'
 
 import Home from './home'
-import { IHome } from '../types'
 
-const HOMES: IHome[] = require('../homez.json')
-
+const homesQuery = loader('src/graphql/queries/homes.graphql')
+// TODO setup hooks so I can type return. hook up filter
 const Homez: FC = () => {
   const [value, setValue] = useState('')
+
+  const { data, loading, error } = useQuery(homesQuery);
+  const { homes } = data
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -21,11 +25,15 @@ const Homez: FC = () => {
         onChange={onChange}
         placeholder={'Search Homez'}
       />
-      {map((home) => (
-        <HomeContainer key={home.id}>
-          <Home home={home}/>
-        </HomeContainer>
-      ), HOMES)}
+      {loading 
+        ? <div>loading</div> 
+        : error 
+          ? <div>error</div> 
+          : map((home) => (
+            <HomeContainer key={home.id}>
+              <Home home={home}/>
+            </HomeContainer>
+          ), homes)}
     </Container>
   )
 }
@@ -37,7 +45,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
 
 const SearchFilter = styled.input`
   width: 320px;

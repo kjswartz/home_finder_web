@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.4.13",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -12,6 +13,8 @@
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "@types/styled-components": "^5.1.14",
+    "graphql": "^15.6.0",
+    "graphql.macro": "^1.4.2",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -24,7 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "graphql:generate": "npx apollo client:codegen src/graphql/schema.ts --outputFlat --includes=**/*.graphql --endpoint=http://localhost:3001/graphql --target typescript"
   },
   "eslintConfig": {
     "extends": [
