@@ -12,7 +12,6 @@ const Homez: FC = () => {
   const [value, setValue] = useState('')
 
   const { data, loading, error } = useQuery(homesQuery);
-  const { homes } = data
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -33,7 +32,7 @@ const Homez: FC = () => {
             <HomeContainer key={home.id}>
               <Home home={home}/>
             </HomeContainer>
-          ), homes)}
+          ), data.homes)}
     </Container>
   )
 }
