@@ -14,8 +14,7 @@ export interface Homes_homes {
   city: string | null;
   state: string | null;
   zip: string | null;
-  propertyType: string | null;
-  yearBuilt: string | null;
+  url: string | null;
 }
 
 export interface Homes {

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { ApolloProvider } from '@apollo/client'
 import styled from 'styled-components'
-import Homez from './components/homez'
+import Homez from './components/Homez'
 
 import { client } from './apolloClient'
 

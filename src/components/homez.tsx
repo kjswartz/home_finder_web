@@ -1,8 +1,11 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
-import { map } from 'lodash/fp'
+import { map, isEmpty } from 'lodash/fp'
 
-import Home from './home'
+import Home from './Home'
+import Loader from './Loader'
+import Error from './Error'
+import NoResults from './NoResults'
 import useHomesQuery from '../graphql/hooks/useHomesQuery'
 import { useThrottle } from '../utils/useThrottle'
 
@@ -30,14 +33,17 @@ const Homez: FC = () => {
         placeholder={'Search Homez'}
       />
       {loading 
-        ? <Loading>LOADING...</Loading> 
+        ? <Loader />
         : error 
-          ? <Error>ERROR</Error>
-          : map((home) => (
-            <HomeContainer key={home.id}>
-              <Home home={home}/>
-            </HomeContainer>
-          ), homes)}
+          ? <Error />
+          : isEmpty(homes) 
+            ? <NoResults /> 
+            : map((home) => (
+                <HomeContainer key={home.id}>
+                  <Home home={home}/>
+                </HomeContainer>
+              ), homes)
+      }
     </Container>
   )
 }
@@ -60,14 +66,4 @@ const SearchFilter = styled.input`
 const HomeContainer = styled.div`
   border: 1px solid black;
   margin: 10px 0;
-`;
-
-const Error = styled.div`
-  color: red;
-  font-weight: 700;
-`;
-
-const Loading = styled.div`
-  color: blue;
-  font-weight: 700;
 `;

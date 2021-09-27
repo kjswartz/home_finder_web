@@ -5,7 +5,6 @@ query Homes($search: String) {
     city
     state
     zip
-    propertyType
-    yearBuilt
+    url
   }
 }
