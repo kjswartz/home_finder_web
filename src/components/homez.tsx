@@ -1,20 +1,25 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { map } from 'lodash/fp'
-import { useQuery  } from '@apollo/client'
-import { loader } from 'graphql.macro'
 
 import Home from './home'
+import useHomesQuery from '../graphql/hooks/useHomesQuery'
+import { useThrottle } from '../utils/useThrottle'
 
-const homesQuery = loader('src/graphql/queries/homes.graphql')
-// TODO setup hooks so I can type return. hook up filter
 const Homez: FC = () => {
   const [value, setValue] = useState('')
+  const [search, setSearch] = useState<string | null>(null)
+  const throttledQuery = useThrottle(2000)
 
-  const { data, loading, error } = useQuery(homesQuery);
+  const { homes, loading, error } = useHomesQuery({
+    variables: { search }
+  })
+
+  const updateQuery = (newValue: string) => setSearch(newValue)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
+    throttledQuery(updateQuery, e.target.value)
   };
 
   return (
@@ -25,14 +30,14 @@ const Homez: FC = () => {
         placeholder={'Search Homez'}
       />
       {loading 
-        ? <div>loading</div> 
+        ? <Loading>LOADING...</Loading> 
         : error 
-          ? <div>error</div> 
+          ? <Error>ERROR</Error>
           : map((home) => (
             <HomeContainer key={home.id}>
               <Home home={home}/>
             </HomeContainer>
-          ), data.homes)}
+          ), homes)}
     </Container>
   )
 }
@@ -55,4 +60,14 @@ const SearchFilter = styled.input`
 const HomeContainer = styled.div`
   border: 1px solid black;
   margin: 10px 0;
+`;
+
+const Error = styled.div`
+  color: red;
+  font-weight: 700;
+`;
+
+const Loading = styled.div`
+  color: blue;
+  font-weight: 700;
 `;

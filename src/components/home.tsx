@@ -7,10 +7,13 @@ interface Props {
   home: Homes_homes
 }
 
-const Home: FC<Props> = ({ home: { address } }) => {
+const Home: FC<Props> = ({ home: { address, city, state, zip } }) => {
   return (
     <Container>
-      {address}
+      <Item>ADDRESS: {address}</Item>
+      <Item>CITY: {city}</Item>
+      <Item>STATE: {state}</Item>
+      <Item>ZIP: {zip}</Item>
     </Container>
   )
 }
@@ -18,5 +21,11 @@ const Home: FC<Props> = ({ home: { address } }) => {
 export default Home;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+`;
+
+const Item = styled.div`
   display: flex;
 `;
